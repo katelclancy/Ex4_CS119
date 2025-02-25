@@ -4,22 +4,17 @@ Created on Tue Feb 25 16:05:35 2025
 
 @author: KateClancy
 """
-#!/usr/bin/env python
-"""apache_mapper.py"""
-
-import sys, re
+#!/usr/bin/env python3
+import sys
+import re
 
 def main(argv):
-    requestdict = {}
-    line = sys.stdin.readline()
     pattern = re.compile(r"\b([A-Z]{1,9})\b\s/")
-    try:
-        while line:
-            for word in pattern.findall(line):
-                print("LongValueSum:" + word + "\t" + "1")
-            line = sys.stdin.readline()
-    except EOFError as error:
-        return None
+    for line in sys.stdin:
+        # For each line, find all matches of the HTTP method followed by space and '/'
+        for word in pattern.findall(line):
+            # Print only the captured HTTP method with the desired prefix and count 1
+            print("LongValueSum:" + word + "\t1")
 
 if __name__ == "__main__":
     main(sys.argv)
